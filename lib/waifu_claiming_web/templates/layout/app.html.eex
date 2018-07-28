@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Waifu Claiming v0.1!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <%= link "Waifu Claiming", to: page_path(@conn, :index), class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link "Registra", to: waifu_path(@conn, :new), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link "Reclama", to: page_path(@conn, :index), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= if @conn.assigns.user do %>
+            <%= link "Salir", to: auth_path(@conn, :signout), class: "nav-link" %>
+          <% else %>
+            <%= link "Iniciar sesion con Facebook", to: auth_path(@conn, :request, "facebook"), class: "nav-link" %>
+          <% end %>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/" method="get">
+          <input name="q" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container">
+      <%= if info = get_flash(@conn, :info) do %>
+      <p class="alert alert-info" role="alert"><%= info %></p>
+      <% end %>
+
+      <%= if error = get_flash(@conn, :error) do %>
+      <p class="alert alert-danger" role="alert"><%= error %></p>
+      <% end %>
+
+      <%= render @view_module, @view_template, assigns %>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

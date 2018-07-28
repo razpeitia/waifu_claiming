@@ -1,0 +1,5 @@
+<h1>Total waifus: <%= WaifuClaiming.Claims.count_waifus() %></h1>
+<%= for waifu <- @waifus do %>
+	<h2><%= waifu.name %> (<%= WaifuClaiming.Claims.status(waifu) %>)</h2>
+	<img src="<%= waifu.avatar %>" width="100px" height="100px" />
+<% end %>

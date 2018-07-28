@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+  <h1>Conteo Regresivo</h1>
+  <p class="lead">
+  	Registra tu Waifu, espera por aprobación de un admin y reclama tu waifu en punto de las 00:00 CTS cada Domingo.
+  </p>
+  <h1 id="clock"></h1>
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.0/moment-timezone-with-data-2010-2020.min.js"></script>
+
+
+<script type="text/javascript">
+	var nextSunday = moment.tz("<%= @next_sunday %>", "America/Monterrey");
+	console.log(nextSunday);
+
+	$('#clock').countdown(nextSunday.toDate(), function(event) {
+	  $(this).html(event.strftime('%Dd %Hh %Mm %Ss'));
+	});
+</script>

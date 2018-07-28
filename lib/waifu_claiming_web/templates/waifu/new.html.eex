@@ -1,0 +1,15 @@
+<%= form_for @changeset, waifu_path(@conn, :create), [multipart: true], fn f -> %>
+  <div class="form-group">
+    <%= label f, :name, "Nombre" %>
+    <%= text_input f, :name, placeholder: "", class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :avatar, "Avatar" %>
+    <%= file_input f, :avatar, class: "form-control" %>
+    <%= error_tag f, :avatar %>
+  </div>  
+
+  <%= submit "Guardar", class: "btn btn-primary" %>
+<% end %>
